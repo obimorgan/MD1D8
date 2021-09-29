@@ -1,0 +1,231 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@obimorgan 
+danielebanovaz
+/
+WEB-Sep21-M1D7
+Public
+1
+01
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+WEB-Sep21-M1D7/index.html
+@danielebanovaz
+danielebanovaz Used window.onload to safely run some code at startup
+Latest commit 8a85601 4 hours ago
+ History
+ 1 contributor
+188 lines (133 sloc)  5.09 KB
+   
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    <title>Accessing Elements in the DOM</title>
+
+
+    <style>
+      html {
+        font-family: sans-serif;
+        color: #333;
+      }
+      body {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+      div div,
+      div article {
+        padding: 10px;
+        margin: 5px;
+        border: 1px solid #dedede;
+      }
+
+      .selected {
+        color: orange;
+        border-radius: 6px;
+        border-width: 2px;
+        border-color: orange;
+        border-style: solid;
+        padding: 4px;
+      }
+    </style>
+  </head>
+
+
+  <body>
+      <script type="text/javascript">
+
+        let toggleSelectedClassToDemoId = function() {
+            // Add a class to DIV
+            let demoDiv = document.getElementById("demo-id")
+            demoDiv.classList.toggle("selected")
+        }
+
+        let toggleSelectedClassToEachH2 = function() {
+
+            let headers = document.getElementsByTagName("h2")
+
+            for (let header of headers) {
+                header.classList.toggle("selected")
+            }
+        }
+
+        let createNewElement = function(eventData) {
+
+            let usernameInputNode = document.getElementById("user-name")
+            let username = usernameInputNode.value
+
+            // HERE WE ARE CREATING A NEW HTML ELEMENT (A NODE)
+            // It will only live in memory, and be destroyed
+            // UNLESS we attach it to some element in the DOM
+
+            let newElement = document.createElement("div")
+            // <div></div>
+
+            newElement.innerText = `Hi, I'm ${username} and I clicked on X: ${eventData.screenX}, Y: ${eventData.screenY}`
+            // <div>Hi, I'm the new guy here</div>
+
+            newElement.style.color = "lightblue"
+            // <div style="color:lightblue;">Hi, I'm the new guy here</div>
+
+            // This way we dynamically attach our function/listener to the 'on click' event
+            // WARNING: we're NOT calling the function RIGHT NOW, so we don't need the brackets ()
+            // This is the same as writing:
+            // ... onclick="changeTextColor(event)"
+            // in static HTML code
+            newElement.onclick = changeTextColor
+
+            // HERE WE ARE ATTACHING THE NEWLY CREATED ELEMENT TO THE DOM
+            // From now on, it will show up in the page
+
+            // Let's find its parent...
+            let parent = document.getElementById("demo-id")
+
+            // ...and then we attach the newly created DIV to it
+            parent.appendChild(newElement)
+
+            // WHAT IF WE WANT TO REMOVE THE CLICKED BUTTON?
+            let buttonToRemove = document.getElementById("element-creation-button")
+            buttonToRemove.remove()
+
+
+        }
+
+        const changeTextColor = function(eventData) {
+
+          let clickedNode = eventData.target
+          clickedNode.style.color = "red"
+          clickedNode.innerText = "Ouch! Don't click me"
+
+        }
+
+        const updateHeaderText = function(eventData) {
+
+          let usernameInputNode = document.getElementById("user-name")
+
+          let header = document.getElementById("demo-id")
+          header.innerText = usernameInputNode.value
+
+        }
+
+        // The window.onload event is fired as soon as the page
+        // is FULLY LOADED and every HTML node has been read and created in the DOM
+        window.onload = function() {
+
+          // We should put here any code that we need to run as soon as the page is ready
+          toggleSelectedClassToDemoId()
+
+        }
+
+    </script>
+
+
+    <h1>Accessing Elements in the DOM</h1>
+
+    <button onclick="toggleSelectedClassToDemoId()">Toggle 'selected'</button>
+
+    <input type="button" value="Toggle all DIVs" onclick="toggleSelectedClassToEachH2()" /> 
+    
+    <button id="element-creation-button" onclick="createNewElement(event)">Create new element</button>
+
+    <br />
+    <br />
+
+    <label for="user-name">Username:</label>
+    <input id="user-name" type="text" onkeyup="updateHeaderText(event)" placeholder="Write your username here" />
+
+    <div>
+      <h2 id="demo-id">ID (#demo-id)</h2>
+      <div>Access me by ID</div>
+    </div>
+
+
+    <div>
+      <h2>Class (.demo-class)</h2>
+      <div class="demo-class">Access me by class (1)</div>
+      <div class="demo-class">Access me by class (2)</div>
+    </div>
+
+
+    <div>
+      <h2>Tag (article)</h2>
+      <div id="article-container">
+        <article>Access me by tag (1)</article>
+        <article>Access me by tag (2)</article>
+      </div>
+    </div>
+
+
+    <div id="demo-query">
+      <h2>Query Selector</h2>
+      <div>Access me by query</div>
+    </div>
+
+
+    <div>
+      <h2>Query Selector All</h2>
+      <div class="demo-query-all">Access me by query all (1)</div>
+      <div class="demo-query-all">Access me by query all (2)</div>
+    </div>
+
+
+    <h2>A more complex query</h2>
+    <div id="more-complex">
+      <ul>
+        <li>First element inside a list</li>
+        <li>Second element inside a list</li>
+        <li>Third element inside a list</li>
+      </ul>
+    </div>
+
+    
+  </body>
+</html> 
+© 2021 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete

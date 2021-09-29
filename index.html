@@ -1,0 +1,187 @@
+
+<!-- saved from url=(0436)https://s3.eu-west-1.amazonaws.com/eduflow-production/activity-resources/585615096809212.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2TAWW44RCEE6YREN%2F20210929%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20210929T120540Z&X-Amz-Expires=600&X-Amz-SignedHeaders=host&response-content-disposition=inline%3B%20filename%2A%3DUTF-8%27%27M1-D8.html&X-Amz-Signature=40a8173fceffb836b0c5e35681aedeae53dc0daa4a49d29ae1176d58228b4ada -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <style>
+      .myHeading {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>This is the title of the page</h1>
+      <h2>This is the subtitle of the page</h2>
+    </header>
+
+    <main>
+      <hr>
+
+      <ul id="firstList">
+        <li>1st</li>
+        <li>2nd</li>
+        <li>3rd</li>
+      </ul>
+
+      <ul id="secondList">
+        <li>1st</li>
+        <li>2nd</li>
+        <li>3rd</li>
+      </ul>
+
+      <a href="https://s3.eu-west-1.amazonaws.com/eduflow-production/activity-resources/strive.school">This link goes to Strive School</a>
+
+      <div>
+        <p>This text is just for the exercise</p>
+      </div>
+
+      <div>
+        <input type="text" id="input-field" placeholder="input field for the exercise">
+      </div>
+    </main>
+
+    <footer>
+      <p>And this text is just for the exercise too!</p>
+      <h2 style="color: red">
+        Save this page on your computer and open it with VSCode to get the
+        questions!
+      </h2>
+    </footer>
+    <script>
+      /* EXERCISE 1
+       Write a function for changing the title of the document in something else.
+      */
+
+      const changeTitle = function (newTitle) {
+        let newTitle = " " 
+        document.querySelector("h1").innerHTML = newTitle
+      }
+
+      /* EXERCISE 2
+       Write a function for changing the class of the title of the page in "myHeading".
+      */
+
+      const addClassToTitle = function () {
+        let addClass = document.querySelector("h1").classList.add("new class")
+      };
+
+      /* EXERCISE 3
+       Write a function for changing the text of only the p which are children of a div.
+      */
+
+      const changePcontent = function () {
+        document.querySelector("div > p").innerHTML = "New Text"
+      };
+
+      /* EXERCISE 4
+       Write a function for changing the href property of every link to https://www.google.com
+      */
+
+      const changeUrls = function (link) {
+        let lengthOfATag = document.querySelectorAll("a")
+        for (i = 0; i < lengthOfATag.length; i++) {
+            lengthOfATag[i].href = "https://www.google.com"
+        }
+      };
+
+      /* EXERCISE 5
+       Write a function for adding a new list item in the second unordered list.
+      */
+
+      const addToTheSecond = function (content) {
+        let aNewList = document.createElement("li")
+        let listContent = document.createTextNode(content)
+        aNewList.appendChild(listContent)
+        document.getElementById("secondlist").appendChild(aNewLIst)
+      };
+
+      /* EXERCISE 6
+       Write a function for adding a second paragraph to the first div.
+      */
+
+      const addParagraph = function (content) {
+        let newP = document.createElement("p")
+        let paragraphContent = document.createTextNode(content)
+        newP.appendChild(paragraphContent)
+        document.querySelector("div").appendChild(newP)
+      };
+
+      /* EXERCISE 7
+       Write a function for making the first unordered list disappear.
+      */
+
+      const firstUlDisappear = function () {
+        document.querySelector("ul").remove()
+      };
+
+      /* EXERCISE 8
+       Write a function for making the background of every unordered list green.
+      */
+
+      const paintItGreen = function () {
+        let everyUnorderedList = document.querySelectorAll("ul")
+        for (i = 0; i < everyUnorderedList.length; i++) {
+            everyUnorderedList[i].style.backgrounColor = "green"
+        }
+      };
+
+      /* EXERCISE 9
+       Make the heading of the page change color every time the user clicks on it.
+      */
+
+      const makeItClickable = function (eventData) {
+        let heading = document.querySelector("h1")
+        
+        const getRandomColor = function () {
+            const red = Math.round(Math.random() * 255);
+            const green = Math.round(Math.random() * 255);
+            const blue = Math.round(Math.random() * 255);
+                return "rgb(" + red + ", " + green + ", " + blue + ")";
+        }
+        const changeTextColor = function(eventData) {
+        let clickedNode = eventData.target
+        clickedNode.style.color = getRandomColor
+        }
+
+        heading.onclick = changeTextColor
+      }
+
+      /* EXERCISE 10
+       Change the footer text with something else when the user clicks on it.
+      */
+
+      const changeFooterText = function () {
+        const newParagraph = function () {
+            document.querySelectorAll("footer > p").remove()
+            let newPara = document.querySelector("footer").createElement("p")
+            let paragraphContent = newPara.createTextNode("Something Else")
+            newPara.appendChild(paragraphContent)
+        }
+        document.querySelectorAll("footer > p").addEventListener("click", newParagraph)
+      };
+
+      /* EXERCISE 11
+       Attach an event listener to the input field in the page for console logging its value just after any keystroke.
+      */
+
+      const inputField = document.getElementById("input-field");
+      const consoleLog = function () {
+          let inputField = document.getElementById("input-field").nodeValue
+          console.log(inputField)
+      }
+      inputField.addEventListener("keydown", consoleLog())
+
+      /* EXERCISE 12
+       Create a welcome alert message when the page successfully loads.
+      */
+
+      window.onload = function () {
+        alert("Welcome!!")
+      };
+
+      /* EXERCISE 13
+       Use HTML5 tags to properly provide semantic meaning to the different portions of the page.
+      */
+    </script>
+  
+
+</body></html>
